@@ -1,4 +1,4 @@
-class Patient {
+export class Patient {
   constructor(
     id,
     identificationDocument,
@@ -27,10 +27,18 @@ class Patient {
     this.medicalRecord = new MedicalRecord();
   }
 
-  addAllergy(type) {
-    const allergy = new Allergy(type);
-    this.allergies.push(allergy);
-    console.log(`Allergy ${allergy} added to patient ${this.name}.`);
+  addAllergy(allergy) {
+    if (!(allergy instanceof Allergy)) {
+      throw new Error('Invalid allergy object.');
+    }
+    const hasAllergy = this.allergies.some((a) => a.equals(allergy));
+
+    if (!hasAllergy) {
+      this.allergies.push(allergy);
+      console.log(`Allergy added to patient ${this.name}.`);
+    } else {
+      console.log(`Allergy already exists for patient ${this.name}.`);
+    }
   }
 
   addDiagnosis(description) {
@@ -40,7 +48,9 @@ class Patient {
   }
 
   addExam(exam) {
-    this.exams.push(exam);
+    if (!(exam instanceof Exam)) {
+      throw new Error('Invalid exam object.');
+    }
     console.log(`Exam ${exam.type} added with result: ${exam.result}`);
   }
 
@@ -57,19 +67,17 @@ class Patient {
   }
 
   scheduleAppointment(appointment) {
-    const hasAppointmentAtSameTime = this.appointments.some(
-      (a) => a.date.getTime() === appointment.date.getTime(),
-    );
-
-    if (hasAppointmentAtSameTime) {
-      throw new Error('Patient already has an appointment schedule for this time.');
+    if (!(appointment instanceof Appointment)) {
+      throw new Error('Invalid appointment object.');
     }
 
-    this.appointments.push(appointment);
-    console.log(
-      `Appointment scheduled for ${appointment.date} with ${appointment.doctor.name}`,
-    );
+    const hasConflict = this.appointments.some((a) => a.hasConflict(appointment));
+
+    if (!hasConflict) {
+      this.appointments.push(appointment);
+      console.log(`Appointment scheduled for ${appointment.date} with ${appointment.doctor.name}.`);
+    } else {
+      console.log(`Appointment conflict detected for patient ${this.name}`)
+    }
   }
 }
-
-module.exports = Paciente;
