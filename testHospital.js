@@ -2,7 +2,7 @@ const Address = require("./address");
 const Consulta = require("./consulta");
 const EmergencyContact = require("./emergencyContact");
 const Exame = require("./exame");
-const Medico = require("./medico");
+const Doctor = require("./doctor");
 const Paciente = require("./paciente");
 const Prontuario = require("./prontuario");
 
@@ -30,20 +30,22 @@ const paciente1 = new Paciente(
   emergencyContact,
 );
 
-const medico1 = new Medico(
+const doctor1 = new Doctor(
   "101",
   "CRM/SP 123456",
   "Dr. Carlos",
   ["Cardiologia", "Clínica Geral"],
   "(11) 77777-7777",
-  { dias: ["Segunda", "Quarta"], horario: "14:00-18:00" },
 );
+
+doctor1.addWorkingHours("Segunda", "14:00-18:00");
+doctor1.addWorkingHours("Quarta", "14:00-18:00");
 
 const consulta1 = new Consulta(
   "201",
   "2023-10-15",
   paciente1,
-  medico1,
+  doctor1,
   "Dor no peito",
   "Agendada",
   "Paciente relatou dor no peito após esforço físico.",
@@ -67,4 +69,4 @@ prontuario1.adicionarDiagnostico("Hipertensão");
 prontuario1.adicionarTratamento("Redução no consumo de sal");
 prontuario1.adicionarMedicamento("Captopril");
 
-console.log(paciente1);
+console.log(doctor1);
