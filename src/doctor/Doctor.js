@@ -1,6 +1,6 @@
-const WorkingHours = require("./workingHours");
+import { WorkingHours } from './WorkingHours.js'
 
-class Medico {
+export class Doctor {
   constructor(id, rcm, name, specialties, phone) {
     this.id = id;
     this.rcm = rcm;
@@ -22,5 +22,3 @@ class Medico {
     return this.workingHours.listHours();
   }
 }
-
-module.exports = Medico;

@@ -1,4 +1,4 @@
-class EmergencyContact {
+export class EmergencyContact {
   constructor(name, phone) {
     this.name = name;
     this.phone = phone;
@@ -8,5 +8,3 @@ class EmergencyContact {
     return this.name === otherContact.name && this.phone === otherContact.phone;
   }
 }
-
-module.exports = EmergencyContact;

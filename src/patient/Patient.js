@@ -1,3 +1,8 @@
+import { Allergy } from './Allergy.js';
+import { Appointment } from './Appointment.js';
+import { Exam } from './Exam.js';
+import { MedicalRecord } from './record/MedicalRecord.js';
+
 export class Patient {
   constructor(
     id,
