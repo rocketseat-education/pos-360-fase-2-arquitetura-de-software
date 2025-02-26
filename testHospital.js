@@ -1,16 +1,8 @@
 import { Address } from './src/shared/Address.js';
 import { EmergencyContact } from './src/shared/EmergencyContact.js';
 
-import { Allergy } from './src/patient/Allergy.js';
-import { Appointment } from './src/patient/Appointment.js';
-import { Exam } from './src/patient/Exam.js';
 import { Patient } from './src/patient/Patient.js';
-
-import { Diagnosis } from './src/patient/record/Diagnosis.js';
-import { Treatment } from './src/patient/record/Treatment.js';
-import { Medication } from "./src/patient/record/Medication.js";
-
-import { Doctor } from './src/doctor/Doctor.js';
+import { PatientRepository } from "./src/patient/PatientRepository.js";
 
 const address = new Address(
   'Rua das Flores',
@@ -23,7 +15,7 @@ const address = new Address(
 const emergencyContact = new EmergencyContact('Maria Silva', '(11) 88888-88888');
 
 const patient = new Patient(
-  '1',
+  1,
   '123-456-789-00',
   'João Silva',
   '1990-01-01',
@@ -35,43 +27,27 @@ const patient = new Patient(
   emergencyContact,
 );
 
-const doctor = new Doctor(
-  '1',
-  'CRM/SP 123456',
-  'Dr. Carlos',
-  ['Cardiologista', 'Clínica Geral'],
-  '(11) 77777-7777',
+const patient2 = new Patient(
+  1,
+  '123-456-789-00',
+  'João Silva Sauro',
+  '1990-01-01',
+  'Masculino',
+  'O+',
+  address,
+  '(11) 99999-9999',
+  'joao.silva@email.com',
+  emergencyContact,
 );
 
-const appointment = new Appointment(
-  '1',
-  '2025-10-10',
-  patient,
-  doctor,
-  'Dor no peito',
-  'Agendada',
-  'Paciente relatou dor no peito após esforço físico.',
-);
+const patientRepository = new PatientRepository();
 
-const exam = new Exam(
-  '1',
-  'Hemograma',
-  'Normal',
-  '2025-10-11',
-  'Laboratório X',
-  'Dr. Ana',
-  patient,
-);
+patientRepository.add(patient.id, patient);
 
-doctor.addWorkingHours('Segunda', '14:00-18:00');
-doctor.addWorkingHours('Quarta', '14:00-18:00');
+// patientRepository.delete(1)
 
-patient.addAllergy(new Allergy('Penicilina'));
-patient.scheduleAppointment(appointment);
-patient.addExam(exam);
+patientRepository.update(patient.id, patient2);
 
-patient.medicalRecord.addDiagnosis(new Diagnosis('Hipertensão'));
-patient.medicalRecord.addTreatment(new Treatment('Redução no consumo de sal'));
-patient.medicalRecord.addMedication(new Medication("Captopril", "25mg"));
+const foundPatient = patientRepository.findById(1);
 
-console.log(patient.medicalRecord.medications);
+console.log(patientRepository.findAll());
