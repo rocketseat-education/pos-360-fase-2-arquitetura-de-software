@@ -1,8 +1,20 @@
+const Address = require("./address");
 const Consulta = require("./consulta");
+const EmergencyContact = require("./emergencyContact");
 const Exame = require("./exame");
 const Medico = require("./medico");
 const Paciente = require("./paciente");
 const Prontuario = require("./prontuario");
+
+const emergencyContact = new EmergencyContact("Maria Silva", "(11) 88888-8888");
+
+const address = new Address(
+  "Rua das Flores",
+  "123",
+  "São Paulo",
+  "São Paulo",
+  "(11) 11111-1111"
+)
 
 const paciente1 = new Paciente(
   "1",
@@ -12,10 +24,10 @@ const paciente1 = new Paciente(
   "Masculino",
   "0+",
   "Nenhuma",
-  "Rua das Flores, 123",
+  address,
   "(11) 99999-9999",
   "joao.silva@email.com",
-  { nome: "Maria Silva", telefone: "(11) 88888-8888" },
+  emergencyContact,
 );
 
 const medico1 = new Medico(
@@ -55,4 +67,4 @@ prontuario1.adicionarDiagnostico("Hipertensão");
 prontuario1.adicionarTratamento("Redução no consumo de sal");
 prontuario1.adicionarMedicamento("Captopril");
 
-console.log(consulta1);
+console.log(paciente1);
