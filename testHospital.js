@@ -3,7 +3,7 @@ const Consulta = require("./consulta");
 const EmergencyContact = require("./emergencyContact");
 const Exame = require("./exame");
 const Doctor = require("./doctor");
-const Paciente = require("./paciente");
+const Paciente = require("./patient");
 const Prontuario = require("./medicalRecord");
 
 const emergencyContact = new EmergencyContact("Maria Silva", "(11) 88888-8888");
