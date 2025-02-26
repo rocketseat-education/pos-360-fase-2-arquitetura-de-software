@@ -9,3 +9,5 @@ class Consulta {
     this.observacoes = observacoes;
   }
 }
+
+module.exports = Consulta;

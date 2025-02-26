@@ -9,3 +9,5 @@ class Exame {
     this.paciente = paciente;
   }
 }
+
+module.exports = Exame;

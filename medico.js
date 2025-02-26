@@ -8,3 +8,5 @@ class Medico {
     this.horarioAtendimento = horarioAtendimento;
   }
 }
+
+module.exports = Medico;

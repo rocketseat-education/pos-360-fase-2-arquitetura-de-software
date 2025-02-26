@@ -50,3 +50,5 @@ class Paciente {
     console.log(`Evento médico adicionado ao histórico do paciente ${this.nome}`);
   }
 }
+
+module.exports = Paciente;
