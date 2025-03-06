@@ -1,4 +1,4 @@
-import { WorkingHours } from './WorkingHours.js'
+import { WorkingHours } from "../value-objects/WorkingHours.js";
 
 export class Doctor {
   constructor(id, rcm, name, specialties, phone) {

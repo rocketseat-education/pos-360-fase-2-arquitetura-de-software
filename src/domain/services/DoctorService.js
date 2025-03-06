@@ -1,4 +1,4 @@
-import { Doctor } from "./Doctor.js";
+import { Doctor } from "../entities/Doctor.js";
 
 export class DoctorService {
   constructor(doctorRepository) {
@@ -62,6 +62,8 @@ export class DoctorService {
     if (hasWorkingHours) {
       throw new Error('Working hours already exist.');
     }
+
+    doctor.workingHours.hours.push({ day, timeSlot });
 
     this.doctorRepository.update(doctor.id, doctor);
     return doctor;

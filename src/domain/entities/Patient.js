@@ -1,6 +1,6 @@
 import { Appointment } from './Appointment.js';
 import { Exam } from './Exam.js';
-import { MedicalRecord } from './record/MedicalRecord.js';
+import { MedicalRecord } from '../value-objects/medical-record/MedicalRecord.js';
 
 export class Patient {
   constructor(

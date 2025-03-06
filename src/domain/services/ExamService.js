@@ -1,4 +1,4 @@
-import { Exam } from "./Exam.js";
+import { Exam } from "../entities/Exam.js";
 
 export class ExamService {
   constructor(examRepository) {
