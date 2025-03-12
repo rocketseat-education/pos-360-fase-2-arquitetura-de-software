@@ -14,40 +14,40 @@ export class AppointmentService {
   }
 
   execute(appointment) {
+    const doctorId = appointment.doctorId;
+    const date = this.checkDate(appointment);
+
+    this.doctorAvailabilityService.isDoctorAvailable(doctorId, date);
+
+    this.appointmentRepository.add(appointment);
+
+    this.notificationService.notifyAppointmentScheduled(appointment);
+
+    return appointment;
+  }
+
+  findById(id) {
+    const appointment = this.appointmentRepository.findById(id);
+    if (!appointment) {
+      throw new Error('Appointment not found.');
+    }
+    return appointment;
+  }
+
+  findAll() {
+    return this.appointmentRepository.findAll();
+  }
+
+  checkDate(appointment) {
     const date =
-      typeof appointment.date === 'string'
-        ? new Date(appointment.date)
-        : appointment.date;
+    typeof appointment.date === 'string'
+      ? new Date(appointment.date)
+      : appointment.date;
 
     if (!(date instanceof Date) || isNaN(date.getTime())) {
       throw new Error('Invalid date.');
     }
 
-    const patientId = appointment.patient.id;
-    const doctorId = appointment.doctor.id;
-
-    const patient = this.patientService.findPatientById(patientId);
-    const doctor = this.doctorService.findDoctorById(doctorId);
-
-    if (!patient) {
-      throw new Error('Patient not found.');
-    }
-
-    if (!doctor) {
-      throw new Error('Doctor not found.');
-    }
-
-    const isDoctorAvailable = this.doctorAvailabilityService.isDoctorAvailable(
-      doctorId,
-      date
-    );
-
-    if (!isDoctorAvailable) {
-      throw new Error("Doctor is not available at the specified date and time.");
-    }
-
-    this.appointmentRepository.add(appointment.id, appointment);
-    this.notificationService.notifyAppointmentScheduled(appointment);
-    return appointment;
+    return date;
   }
 }
