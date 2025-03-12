@@ -1,6 +1,6 @@
 export class WorkingHours {
-  constructor() {
-    this.hours = [];
+  constructor(hours = []) {
+    this.hours = hours;
   }
 
   equals(otherWorkingHours) {

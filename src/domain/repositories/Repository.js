@@ -5,13 +5,13 @@ export class Repository {
 
   add(id, entity) {
     if (this.data.has(id)) {
-      throw new Error('Entity already exists.');
+      throw new Error("Entity already exists.");
     }
-    this.data.set(id, entity);
+    this.data.set(Number(id), entity);
   }
 
   findById(id) {
-    return this.data.get(id);
+    return this.data.get(Number(id));
   }
 
   findAll() {
@@ -19,16 +19,16 @@ export class Repository {
   }
 
   update(id, entity) {
-    if (!this.data.has(id)) {
-      throw new Error('Entity not found.');
+    if (!this.data.has(Number(id))) {
+      throw new Error("Entity not found.");
     }
-    this.data.set(id, entity);
+    this.data.set(Number(id), entity);
   }
 
   delete(id) {
-    if (!this.data.has(id)) {
-      throw new Error('Entity not found.');
+    if (!this.data.has(Number(id))) {
+      throw new Error("Entity not found.");
     }
-    this.data.delete(id);
+    this.data.delete(Number(id));
   }
 }
